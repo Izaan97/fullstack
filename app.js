@@ -14,7 +14,7 @@ let auth = require('./controllers/auth');
 app.set('view engine', 'ejs');
 
 
-mongoose.connect('mongodb+srv://izaan:sora--1234@cluster0.wapaq7d.mongodb.net/travels');
+mongoose.connect('mongodb+srv://izaan:[password]@cluster0.wapaq7d.mongodb.net/travels');
 app.use(express.json());
 let imageStorage = multer.diskStorage({
     destination: (req, file, cb) => cb(null, 'public/images'),
