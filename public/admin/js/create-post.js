@@ -7,17 +7,18 @@ let imageFile = document.querySelector('#image-file');
 
 
 
-createForm.addEventListener('submit', function(e) {
+createForm.addEventListener('submit', function (e) {
     e.preventDefault();
     let createText = text.value;
     let createDescription;
-    if(createText.indexOf('.') === -1) {
+    if (createText.indexOf('.') === -1) {
         createDescription = createText;
     } else {
         createDescription = createText.substring(0, createText.indexOf('.') + 1);
     }
 
-    let data = new FormData();
+    const data = new FormData();
+
     data.append('title', title.value);
     data.append('country', country.value);
     data.append('imageURL', imageURL.value);
@@ -25,16 +26,19 @@ createForm.addEventListener('submit', function(e) {
     data.append('description', createDescription);
     data.append('imageFile', imageFile.files[0]);
 
+    for (const value of data.values()) {
+        console.log(value);
+    }
 
     fetch('/posts', {
         method: 'POST',
-        body: data
-    }).then((response)  => response.text()).then((data) => window.history.go());
+        body: data,
+    }).then((response) => response.text()).then((data) => window.history.go());
 })
 
 
 function disableInput(input1, input2) {
-    if(input1.value) {
+    if (input1.value) {
         input2.disabled = true;
     } else {
         input2.disabled = false;
